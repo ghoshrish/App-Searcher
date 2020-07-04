@@ -1,0 +1,15 @@
+{% block content %}
+
+    <h1 style="font-size:150%;  text-align:center;">App Info Card</h1><br>
+    <img src={{appIcon}} style="padding-left: 10px; text-align: center;" alt="Application Icon" width="120" height="120">
+    <h1>{{appName}}</h1>
+    <h1 style="font-size:100%;">Application Developers: {{appDevs}}</h1>
+    <h1 style="font-size:100%;">Application Description:{{appDesc_str}}</h1>
+    <h1 style="font-size:100%;">Number of Installs: {{appInstall}}</h1>
+    <h1 style="font-size:100%;">Application Ratings:{{appRating}}</h1>
+    <h1 style="font-size:100%;">Number of Reviews/Ratings: {{appRatingCount}}</h1>
+
+
+
+    
+  {% endblock %}

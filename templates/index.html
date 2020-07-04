@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="stylesheet" href="newcss.css">
+    <title>App Searcher</title>
+
+    <script type="text/javascript">
+
+        function googleorapple() {
+            if (document.getElementById('google').checked) {
+                document.getElementById('packagename').style.display = 'block';
+                document.getElementById('appname').style.display = 'none';
+                document.getElementById('appID').style.display = 'none';
+            }
+            else 
+            {
+            document.getElementById('packagename').style.display = 'none';
+            document.getElementById('appname').style.display = 'block';
+            document.getElementById('appID').style.display = 'block';
+            }
+        
+        }
+
+        
+        </script>
+       
+</head>
+<body style="background-color:#bacfa7; ">
+
+    <H1 style="text-align:center;" >Application Searcher</H1>
+    <div id="displays" class="display" style="padding-top: 40px; margin:0 auto; 
+	overflow:hidden; display: block; 	height:250px;
+	width: 29%;
+	float: left;
+	align-content: center;
+	background: rgb(192, 214, 151);
+	margin-top:15px;
+        border: 3px solid black;" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" onclick="javascript:googleorapple();"  id="apple" name="store" value="apple">
+    <label for="apple"  style="font-size:150%;">Apple Store&nbsp;&nbsp;&nbsp;&nbsp;</label>  
+    <input type="radio" onclick="javascript:googleorapple();" id="google" name="store" value="google">
+    <label for="google" style="font-size:150%;">Play Store</label><br><br>
+
+  <input type="text"  id="packagename" style="display:none; margin:0px auto" name='packagename' placeholder="Enter Package Name"><br>
+    <input type="text" id="appname" style="display:none; margin:0px auto" name='appname' placeholder="Enter Application Name"><br>
+    <input type="text" id="appID" style="display:none; margin:0px auto" name='appID' placeholder="Enter Application ID"><br>
+
+    <input type="button"  class="button" name="submit" id="submit" value="GetInfo" style=" border: 2px solid black;position: relative; left:122px; padding: 10px 24px;">
+</div>
+    <div id="result" style="display:none; padding-top: 10px;
+	  	height:1660%; min-height: 100%; 
+	width: 70%;
+	float: left;
+	align-content: center;
+	background: rgb(192, 214, 151);
+	margin-top:15px;
+        border: 3px solid black; " ></div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function()
+        {
+            
+            $('#submit').click(function(event)
+            {
+                document.getElementById("submit").disabled = true;
+                var store = $("input[name='store']:checked").val();
+                var packagename = $('#packagename').val();
+                var appname = $('#appname').val();
+                var appID = $('#appID').val();
+                
+                $.ajax({
+                    
+                    method: "GET",
+                    url: "search",
+                    data: {store:store, packagename: packagename, appname: appname, appID:appID},
+                    success: function(status) {
+
+                        $('#result').empty();
+                        $('#result').append(status);
+                        document.getElementById('result').style.display = 'block';
+                        $('#packagename').val('');
+                        $('#appname').val('');
+                        $('#appID').val('');
+                        document.getElementById("submit").disabled = false;
+                        
+                    }
+                });
+            });
+           
+        });
+   
+    </script>
+
+    </div>
+</body>
+</html>
